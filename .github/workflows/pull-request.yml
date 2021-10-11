@@ -1,0 +1,21 @@
+name: validate-pull-requests
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install dependencies
+        run: yarn
+      - name: run eslint
+        run: yarn lint:eslint
+      - name: run prettier
+        run: yarn lint:check
+      - name: test related files
+        run: yarn test:staged ./src/
+      - name: build project
+        run: yarn build

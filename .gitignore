@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Editor files
+.idea
+.vscode
+
+# .env files
+.env
+
+# node
+node_modules
+
+# react
+build
+dist
+
+# jest
+coverage

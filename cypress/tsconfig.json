@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "types": ["cypress", "@testing-library/cypress"],
+        "target": "es6",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "esModuleInterop": true
+    },
+    "include": [
+        "../node_modules/cypress",
+        "./**/*.ts"
+    ],
+}

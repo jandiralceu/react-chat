@@ -1,0 +1,7 @@
+node_modules
+dist
+.storybook
+.idea
+.vscode
+coverage
+build-stats.json

@@ -1,0 +1,5 @@
+{
+  "fixturesFolder": false,
+  "integrationFolder": "cypress/e2e",
+  "pluginsFile": "cypress/plugins/index.js"
+}
