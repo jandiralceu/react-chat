@@ -1,8 +1,11 @@
-import firebase from 'firebase'
-import 'firebase/auth'
-import 'firebase/firestore'
-import 'firebase/storage'
-import 'firebase/database'
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore/lite'
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword
+} from 'firebase/auth'
+import { getStorage, ref } from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_APIKEY,
@@ -13,21 +16,21 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID
 }
 
-const firebaseApp = firebase.initializeApp(firebaseConfig)
-const db = firebaseApp.firestore()
-const auth = firebaseApp.auth()
-const provider = new firebase.auth.GoogleAuthProvider()
-const storage = firebase.storage().ref('images')
-const audioStorage = firebase.storage().ref('audios')
-const createTimestamp = firebase.firestore.FieldValue.serverTimestamp
-const serverTimestamp = firebase.database.ServerValue.TIMESTAMP
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
+
+const auth = getAuth()
+const signWithGoogle = new GoogleAuthProvider()
+
+const storage = getStorage()
+const imagesRef = ref(storage, process.env.FIREBASE_IMAGES_STORAGE)
+const audiosRef = ref(storage, process.env.FIREBASE_AUDIOS_STORAGE)
 
 export {
   db,
   auth,
-  provider,
-  storage,
-  audioStorage,
-  createTimestamp,
-  serverTimestamp
+  signWithGoogle,
+  signInWithEmailAndPassword,
+  imagesRef,
+  audiosRef
 }
