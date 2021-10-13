@@ -1,4 +1,4 @@
-const App = () => {
+const Chat = () => {
   return (
     <div>
       <h1>Hello, World!</h1>
@@ -12,4 +12,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Chat

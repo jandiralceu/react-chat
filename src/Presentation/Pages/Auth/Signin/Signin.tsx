@@ -1,9 +1,13 @@
 const Signin = () => {
   return (
     <div>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, dicta
-      doloremque est facere harum illum ipsum nam necessitatibus nulla odio
-      officia quaerat quisquam quod reprehenderit sint sit totam, veniam vero.
+      <h1>Signin</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, aliquid
+        consectetur cumque cupiditate dignissimos, dolore doloribus ducimus et
+        eveniet expedita illum inventore laboriosam numquam possimus quae, quasi
+        quidem suscipit voluptatem?
+      </p>
     </div>
   )
 }
