@@ -21,7 +21,9 @@
     "skipDefaultLibCheck": true,
     "useDefineForClassFields": true,
     "emitDecoratorMetadata": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "noImplicitThis": true,
+    "strictNullChecks": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

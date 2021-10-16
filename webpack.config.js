@@ -1,4 +1,5 @@
 const path = require('path')
+const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -16,7 +17,7 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss', '.png'],
     alias: {
       '@': path.join(__dirname, 'src')
     }
@@ -63,6 +64,7 @@ module.exports = {
   },
   devtool: 'cheap-module-source-map',
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: isDevelopment
         ? './config/templates/index.dev.html'
