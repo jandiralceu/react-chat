@@ -1,63 +1,64 @@
+import { useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { withFormik } from 'formik'
+import { useInjection } from 'inversify-react'
 import { Box, Divider, TextField } from '@material-ui/core'
 
+import { RemoteAuthentication } from '@/Application/UseCases'
+import { SigninWithGoogle } from '@/Presentation/Components/UI'
+import { SignContainer, OpenText } from '../Auth.Styles'
 import {
   FormLinks,
   SignButton
 } from '@/Presentation/Pages/Auth/Signin/Signin.Styles'
-import { SignContainer, OpenText } from '../Auth.Styles'
-import { useInjection } from 'inversify-react'
-import { RemoteAuthentication } from '@/Application/UseCases'
-import { ChangeEvent, useCallback, useState } from 'react'
-import { EmailAndPasswordParams } from '@/Domain/Models'
-import { SigninWithGoogle } from '@/Presentation/Components/UI'
+import { SigninValidator } from '@/Presentation/Pages/Auth/Signin/Signin.Validator'
 
-const Signin = () => {
+const SigninForm = (props: any) => {
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    handleBlur,
+    errors,
+    touched,
+    ...rest
+  } = props
   const authServices = useInjection(RemoteAuthentication)
-  const [form, setForm] = useState<EmailAndPasswordParams>({
-    email: '',
-    password: ''
-  })
-
-  const updateState = (event: ChangeEvent<HTMLInputElement>) => {
-    setForm((prevState) => {
-      return {
-        ...prevState,
-        [event.target.name]: event.target.value
-      }
-    })
-  }
 
   const signWithGoogle = useCallback(() => {
     authServices.signinWithGoogle().then(console.log).catch(console.log)
   }, [])
 
-  const signWithEmailAndPassword = useCallback(() => {
-    authServices
-      .signinWithEmailAndPassword(form)
-      .then(console.log)
-      .catch(console.log)
-  }, [form])
-
   return (
     <SignContainer>
       <OpenText variant="h2">Welcome to ReactChat</OpenText>
-      <Box width="100%" mt={4}>
+
+      <Box width="100%" mt={4} component="form" onSubmit={handleSubmit}>
         <Box>
           <TextField
+            name="email"
             label="E-mail"
             variant="standard"
             type="email"
+            value={values.email}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            error={touched.email && !!errors.email}
+            helperText={touched.email && errors.email}
             fullWidth
-            onChange={updateState}
           />
         </Box>
         <Box mt={2}>
           <TextField
+            name="password"
             label="Password"
             variant="standard"
             type="password"
-            onChange={updateState}
+            value={values.password}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            error={touched.password && !!errors.password}
+            helperText={touched.password && errors.password}
             fullWidth
           />
         </Box>
@@ -68,11 +69,7 @@ const Signin = () => {
         </FormLinks>
 
         <Box m={4}>
-          <SignButton
-            variant="contained"
-            disableElevation
-            onClick={signWithEmailAndPassword}
-          >
+          <SignButton variant="contained" disableElevation type="submit">
             Sign in
           </SignButton>
         </Box>
@@ -86,5 +83,17 @@ const Signin = () => {
     </SignContainer>
   )
 }
+
+const Signin = withFormik({
+  displayName: 'signinForm',
+  validationSchema: SigninValidator,
+  mapPropsToValues: () => ({
+    email: '',
+    password: ''
+  }),
+  handleSubmit: (values) => {
+    console.log(values)
+  }
+})(SigninForm)
 
 export default Signin

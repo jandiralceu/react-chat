@@ -16,7 +16,13 @@ const Button = styled(MuiButton)(({ theme }) => ({
 }))
 
 export const SigninWithGoogle = (props: ButtonProps) => (
-  <Button disableElevation disableRipple variant="text" {...props}>
+  <Button
+    disableElevation
+    disableRipple
+    variant="text"
+    type="button"
+    {...props}
+  >
     <img
       src={require('@/Presentation/Assets/Images/sign_with_google.svg')}
       alt="google icon"

@@ -13,6 +13,7 @@ import {
 
 const Auth = () => {
   const { path } = useRouteMatch()
+
   return (
     <AuthContainer>
       <Container maxWidth="md" component={Card} elevation={10}>
