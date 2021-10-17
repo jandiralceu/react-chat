@@ -1,29 +1,33 @@
 import { useCallback } from 'react'
+import { useFormik } from 'formik'
 import { Link } from 'react-router-dom'
-import { withFormik } from 'formik'
 import { useInjection } from 'inversify-react'
 import { Box, Divider, TextField } from '@material-ui/core'
 
 import { RemoteAuthentication } from '@/Application/UseCases'
 import { SigninWithGoogle } from '@/Presentation/Components/UI'
 import { SignContainer, OpenText } from '../Auth.Styles'
+
 import {
   FormLinks,
   SignButton
 } from '@/Presentation/Pages/Auth/Signin/Signin.Styles'
 import { SigninValidator } from '@/Presentation/Pages/Auth/Signin/Signin.Validator'
 
-const SigninForm = (props: any) => {
-  const {
-    handleSubmit,
-    handleChange,
-    values,
-    handleBlur,
-    errors,
-    touched,
-    ...rest
-  } = props
+const Signin = () => {
   const authServices = useInjection(RemoteAuthentication)
+
+  const { handleBlur, handleSubmit, handleChange, errors, touched, values } =
+    useFormik({
+      initialValues: {
+        email: '',
+        password: ''
+      },
+      validationSchema: SigninValidator,
+      onSubmit: (values) => {
+        console.log(values)
+      }
+    })
 
   const signWithGoogle = useCallback(() => {
     authServices.signinWithGoogle().then(console.log).catch(console.log)
@@ -83,17 +87,5 @@ const SigninForm = (props: any) => {
     </SignContainer>
   )
 }
-
-const Signin = withFormik({
-  displayName: 'signinForm',
-  validationSchema: SigninValidator,
-  mapPropsToValues: () => ({
-    email: '',
-    password: ''
-  }),
-  handleSubmit: (values) => {
-    console.log(values)
-  }
-})(SigninForm)
 
 export default Signin
