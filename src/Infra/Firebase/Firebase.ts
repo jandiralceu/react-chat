@@ -19,7 +19,7 @@ const firebaseConfig = {
 export class Firebase {
   static app = initializeApp(firebaseConfig)
   static auth = getAuth(this.app)
-  static googleAuthProvider = GoogleAuthProvider
+  static GoogleAuthProvider = GoogleAuthProvider
   static createUserWithEmailAndPassword = createUserWithEmailAndPassword
   static signInWithEmailAndPassword = signInWithEmailAndPassword
   static signInWithPopup = signInWithPopup

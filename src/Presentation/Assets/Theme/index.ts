@@ -1,7 +1,7 @@
-import { createTheme } from '@material-ui/core/styles'
-import { purple, grey } from '@material-ui/core/colors'
+import { createTheme } from '@mui/material/styles'
+import { purple, grey } from '@mui/material/colors'
 
-declare module '@material-ui/core/styles/createPalette' {
+declare module '@mui/material/styles/createPalette' {
   export interface PaletteOptions {
     white: string
   }

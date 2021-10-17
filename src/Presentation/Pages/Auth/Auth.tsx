@@ -1,5 +1,5 @@
 import { Switch, useRouteMatch, Route, Redirect } from 'react-router-dom'
-import { Box, Container, Typography } from '@material-ui/core'
+import { Box, Container, Typography } from '@mui/material'
 
 import Signin from '@/Presentation/Pages/Auth/Signin/Signin'
 import Signup from '@/Presentation/Pages/Auth/Signup/Signup'
@@ -20,7 +20,7 @@ const Auth = () => {
         <Box>
           <CoverImage
             src={require('@/Presentation/Assets/Images/login.png')}
-            alt="People chating"
+            alt="People chatting"
           />
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center">

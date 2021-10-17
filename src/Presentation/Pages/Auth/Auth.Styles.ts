@@ -1,5 +1,5 @@
-import { styled } from '@material-ui/core/styles'
-import { Box, Card as MuiCard, Typography } from '@material-ui/core'
+import { styled } from '@mui/material/styles'
+import { Box, Card as MuiCard, Typography } from '@mui/material'
 
 export const AuthContainer = styled(Box)(({ theme }) => ({
   width: '100%',

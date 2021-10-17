@@ -44,10 +44,10 @@ export class RemoteAuthentication implements Authentication {
   }
 
   async signinWithGoogle(): Promise<any> {
-    Firebase.signInWithPopup(Firebase.auth, new Firebase.googleAuthProvider())
+    Firebase.signInWithPopup(Firebase.auth, new Firebase.GoogleAuthProvider())
       .then((result) => {
         const credential =
-          Firebase.googleAuthProvider.credentialFromResult(result)
+          Firebase.GoogleAuthProvider.credentialFromResult(result)
 
         return {
           token: credential?.accessToken,

@@ -1,5 +1,5 @@
-import { styled } from '@material-ui/core/styles'
-import { Box, Button } from '@material-ui/core'
+import { Box, Button } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 export const FormLinks = styled(Box)(({ theme }) => ({
   display: 'flex',

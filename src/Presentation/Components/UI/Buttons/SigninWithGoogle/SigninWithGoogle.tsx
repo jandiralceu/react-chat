@@ -1,10 +1,5 @@
-import { styled } from '@material-ui/core/styles'
-import {
-  Button as MuiButton,
-  ButtonProps as MuiButtonProps
-} from '@material-ui/core'
-
-type ButtonProps = {} & Pick<MuiButtonProps, 'onClick'>
+import { styled } from '@mui/material/styles'
+import { Button as MuiButton, ButtonProps } from '@mui/material'
 
 const Button = styled(MuiButton)(({ theme }) => ({
   color: theme.palette.grey['500'],
@@ -15,7 +10,7 @@ const Button = styled(MuiButton)(({ theme }) => ({
   }
 }))
 
-export const SigninWithGoogle = (props: ButtonProps) => (
+export const SigninWithGoogle = (props: Pick<ButtonProps, 'onClick'>) => (
   <Button
     disableElevation
     disableRipple
