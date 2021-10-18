@@ -1,10 +1,8 @@
 import { useCallback } from 'react'
 import { useFormik } from 'formik'
 import { Link, useHistory } from 'react-router-dom'
-import { useInjection } from 'inversify-react'
 import { Box, Divider, TextField } from '@mui/material'
 
-import { RemoteAuthentication } from '@/Application/UseCases'
 import { SigninWithGoogle } from '@/Presentation/Components/UI'
 import { SignContainer, OpenText } from '../Auth.Styles'
 
@@ -13,10 +11,11 @@ import {
   SignButton
 } from '@/Presentation/Pages/Auth/Signin/Signin.Styles'
 import { SigninValidator } from '@/Presentation/Pages/Auth/Signin/Signin.Validator'
+import { useAuthentication } from '@/Presentation/Context'
 
 const Signin = () => {
   const history = useHistory()
-  const authServices = useInjection(RemoteAuthentication)
+  const { signinWithGoogle, signinWithEmailAndPassword } = useAuthentication()
 
   const { handleSubmit, errors, touched, getFieldProps } = useFormik({
     initialValues: {
@@ -25,16 +24,15 @@ const Signin = () => {
     },
     validationSchema: SigninValidator,
     onSubmit: (values) => {
-      authServices
-        .signinWithEmailAndPassword(values)
+      signinWithEmailAndPassword(values)
         .then(() => history.push('/'))
         .catch(console.log)
     }
   })
 
   const signWithGoogle = useCallback(() => {
-    authServices.signinWithGoogle().then(console.log).catch(console.log)
-  }, [authServices])
+    signinWithGoogle().then(console.log).catch(console.log)
+  }, [signinWithGoogle])
 
   return (
     <SignContainer>

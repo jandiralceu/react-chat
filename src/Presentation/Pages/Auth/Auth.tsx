@@ -10,9 +10,21 @@ import {
   CoverImage,
   Page
 } from '@/Presentation/Pages/Auth/Auth.Styles'
+import { useAuthentication } from '@/Presentation/Context/AuthContext'
 
 const Auth = () => {
   const { path } = useRouteMatch()
+  const { currentUser } = useAuthentication()
+
+  if (currentUser) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/'
+        }}
+      />
+    )
+  }
 
   return (
     <AuthContainer>

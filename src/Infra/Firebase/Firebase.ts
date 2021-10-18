@@ -4,7 +4,9 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
 } from 'firebase/auth'
 
 const firebaseConfig = {
@@ -23,4 +25,6 @@ export class Firebase {
   static createUserWithEmailAndPassword = createUserWithEmailAndPassword
   static signInWithEmailAndPassword = signInWithEmailAndPassword
   static signInWithPopup = signInWithPopup
+  static onAuthStateChanged = onAuthStateChanged
+  static signOut = signOut
 }

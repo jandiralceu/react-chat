@@ -9,10 +9,12 @@ import { Box, IconButton, Input, Menu, MenuItem } from '@mui/material'
 
 import { Toolbar } from '@/Presentation/Components/UI'
 
-import { Drawer, SearchUserContainer } from './Main.Styles'
+import { Drawer, SearchUserContainer, ImageProfileButton } from './Main.Styles'
+import { useAuthentication } from '@/Presentation/Context/AuthContext'
 
 export const MainLayout = ({ children }: PropsWithChildren<any>) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const { currentUser, signOut } = useAuthentication()
 
   const handleMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -27,15 +29,24 @@ export const MainLayout = ({ children }: PropsWithChildren<any>) => {
       <Drawer variant="permanent" open>
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>
-            <IconButton
-              edge="end"
-              size="large"
-              color="inherit"
-              aria-controls="profile-drawer"
-              aria-label="user image profile"
-            >
-              <AccountCircle />
-            </IconButton>
+            {currentUser?.photoURL ? (
+              <ImageProfileButton
+                aria-controls="profile-drawer"
+                aria-label="user image profile"
+              >
+                <img alt="user account photo" src={currentUser?.photoURL} />
+              </ImageProfileButton>
+            ) : (
+              <IconButton
+                edge="end"
+                size="large"
+                color="inherit"
+                aria-controls="profile-drawer"
+                aria-label="user image profile"
+              >
+                <AccountCircle />
+              </IconButton>
+            )}
           </Box>
 
           <IconButton
@@ -73,7 +84,14 @@ export const MainLayout = ({ children }: PropsWithChildren<any>) => {
               }}
             >
               <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>Signout</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  signOut()
+                  handleClose()
+                }}
+              >
+                Signout
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
@@ -94,6 +112,9 @@ export const MainLayout = ({ children }: PropsWithChildren<any>) => {
             assumenda autem consequatur doloribus excepturi expedita
           </Box>
           <Box component="section">
+            {currentUser
+              ? JSON.stringify(currentUser, null, 2)
+              : 'NO user found'}
             magnam modi nihil obcaecati pariatur placeat quibusdam quidem sequi
             suscipit tenetur! Atque cupiditate omnis quas!
           </Box>

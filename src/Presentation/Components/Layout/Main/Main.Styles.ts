@@ -1,4 +1,4 @@
-import { Drawer as MuiDrawer, Box as MuiBox } from '@mui/material'
+import { Drawer as MuiDrawer, Box as MuiBox, Button } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 export const Drawer = styled(MuiDrawer)(({ theme }) => ({
@@ -20,5 +20,17 @@ export const SearchUserContainer = styled(MuiBox)(({ theme }) => ({
     height: 36,
     padding: '0 8px',
     fontSize: 14
+  }
+}))
+
+export const ImageProfileButton = styled(Button)(() => ({
+  width: 40,
+  height: 40,
+  borderRadius: '100%',
+
+  '& img': {
+    height: 'inherit',
+    width: 'inherit',
+    borderRadius: 'inherit'
   }
 }))

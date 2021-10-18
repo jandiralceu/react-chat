@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { Redirect, Route, RouteProps, useLocation } from 'react-router-dom'
+import { useAuthentication } from '@/Presentation/Context/AuthContext'
 
 export const PrivateRoute = ({
   children,
@@ -7,9 +7,9 @@ export const PrivateRoute = ({
   ...rest
 }: RouteProps) => {
   const location = useLocation()
-  const [expired] = useState(false)
+  const { currentUser } = useAuthentication()
 
-  if (expired) {
+  if (!currentUser) {
     return (
       <Redirect
         to={{

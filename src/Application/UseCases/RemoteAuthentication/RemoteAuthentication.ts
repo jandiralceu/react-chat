@@ -61,4 +61,19 @@ export class RemoteAuthentication implements Authentication {
         }
       })
   }
+
+  verifyUser(): any {
+    return Firebase.onAuthStateChanged(Firebase.auth, (user) => user ?? null)
+  }
+
+  async signOut(): Promise<void> {
+    Firebase.signOut(Firebase.auth)
+      .then()
+      .catch((error) => {
+        return {
+          statusCode: error?.statusCode,
+          message: error?.message
+        }
+      })
+  }
 }
