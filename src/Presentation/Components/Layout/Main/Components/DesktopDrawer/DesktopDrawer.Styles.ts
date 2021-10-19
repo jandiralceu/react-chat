@@ -6,7 +6,8 @@ export const toolbarSize = 190
 export const Drawer = styled(MuiDrawer)(({ theme }) => ({
   '& .MuiDrawer-paper': {
     width: 290,
-    backgroundColor: theme.palette.white
+    backgroundColor: theme.palette.white,
+    overflowX: 'hidden'
   }
 }))
 
@@ -62,7 +63,7 @@ export const MessagesContainer = styled(MuiBox)(() => ({
   minHeight: `calc(100vh - ${toolbarSize}px)`
 }))
 
-export const AppMenu = styled(MuiBox)(({ theme }) => ({
+export const AppMenu = styled(MuiBox)(() => ({
   height: 62,
   margin: 0,
   display: 'flex',
