@@ -6,7 +6,7 @@ import { Toolbar } from '@/Presentation/Components/UI'
 const Chat = () => {
   return (
     <MainLayout>
-      <Toolbar>Username</Toolbar>
+      <Toolbar sx={{ height: 62, minHeight: 62 }}>Username</Toolbar>
 
       <Typography>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam aperiam
