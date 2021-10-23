@@ -1,3 +1,3 @@
-# RCA - React Clean Architecture
+# React Chat
 
-RCA aka React Clean Architecture, it's a boilerplate for React Application using Clean Architecture.
+As the name imply is a chat app created with Reactjs. The Idea of React Chat is to demonstrate how to create a clean architecture in frontend development.
