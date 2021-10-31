@@ -33,13 +33,10 @@ export const DesktopDrawer = ({ open = true }: Pick<DrawerProps, 'open'>) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const searchBar = createRef<any>()
 
-  const handleMenu = (event: MouseEvent<HTMLElement>) => {
+  const handleMenu = (event: MouseEvent<HTMLElement>) =>
     setAnchorEl(event.currentTarget)
-  }
 
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
+  const handleClose = () => setAnchorEl(null)
 
   return (
     <Drawer variant="permanent" sx={{ position: 'relative' }} open={open}>

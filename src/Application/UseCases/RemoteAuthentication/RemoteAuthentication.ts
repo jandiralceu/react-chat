@@ -7,6 +7,8 @@ import { EmailAndPasswordParams } from '@/Domain/Models'
 
 @injectable()
 export class RemoteAuthentication implements Authentication {
+  currentUser: any
+
   async createAccount(params: EmailAndPasswordParams): Promise<any> {
     Firebase.createUserWithEmailAndPassword(
       Firebase.auth,
@@ -62,8 +64,17 @@ export class RemoteAuthentication implements Authentication {
       })
   }
 
-  verifyUser(): any {
-    return Firebase.onAuthStateChanged(Firebase.auth, (user) => user ?? null)
+  verifyUser() {
+    return new Promise((resolve, reject) => {
+      const unSubscribe = Firebase.onAuthStateChanged(
+        Firebase.auth,
+        (user) => {
+          unSubscribe()
+          resolve(user)
+        },
+        reject
+      )
+    })
   }
 
   async signOut(): Promise<void> {

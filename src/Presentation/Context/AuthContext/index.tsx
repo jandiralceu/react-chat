@@ -7,9 +7,8 @@ import {
 } from 'react'
 import { useInjection } from 'inversify-react'
 
-import { RemoteAuthentication } from '@/Application/UseCases'
 import { EmailAndPasswordParams } from '@/Domain/Models'
-import { Firebase } from '@/Infra'
+import { RemoteAuthentication } from '@/Application/UseCases'
 
 type AuthContextProps = {
   currentUser?: any
@@ -49,21 +48,19 @@ export const AuthProvider = ({ children }: PropsWithChildren<any>) => {
   const signOut = () => authServices.signOut()
 
   useEffect(() => {
-    const unsubscribe = Firebase.onAuthStateChanged(Firebase.auth, (user) =>
+    authServices.verifyUser().then((user) => {
       setCurrentUser(user ?? null)
-    )
-
-    return () => unsubscribe()
-  }, [])
+    })
+  }, [currentUser])
 
   return (
     <AuthContext.Provider
       value={{
+        signOut,
         currentUser,
         createAccount,
-        signinWithEmailAndPassword,
         signinWithGoogle,
-        signOut
+        signinWithEmailAndPassword
       }}
     >
       {children}
