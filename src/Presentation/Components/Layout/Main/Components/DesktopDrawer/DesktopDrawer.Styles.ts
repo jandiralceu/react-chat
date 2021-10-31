@@ -1,11 +1,18 @@
 import { styled } from '@mui/material/styles'
-import { Drawer as MuiDrawer, Box as MuiBox, IconButton } from '@mui/material'
+import {
+  Divider as MuiDivider,
+  Drawer as MuiDrawer,
+  Box as MuiBox,
+  IconButton,
+  List,
+  DividerProps
+} from '@mui/material'
 
 export const toolbarSize = 190
 
 export const Drawer = styled(MuiDrawer)(({ theme }) => ({
   '& .MuiDrawer-paper': {
-    width: 290,
+    width: 360,
     backgroundColor: theme.palette.white,
     overflowX: 'hidden'
   }
@@ -58,8 +65,9 @@ export const Warning = styled(MuiBox)(({ theme }) => ({
   fontSize: 14
 }))
 
-export const MessagesContainer = styled(MuiBox)(() => ({
+export const MessagesContainer = styled(List)(() => ({
   marginTop: toolbarSize,
+  padding: 0,
   minHeight: `calc(100vh - ${toolbarSize}px)`
 }))
 
@@ -71,4 +79,8 @@ export const AppMenu = styled(MuiBox)(() => ({
   alignItems: 'center',
   width: '100%',
   padding: '0 10px'
+}))
+
+export const Divider = styled(MuiDivider)<DividerProps>(() => ({
+  marginRight: 10
 }))

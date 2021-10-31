@@ -15,10 +15,11 @@ import {
   ArrowBack as BackIcon
 } from '@mui/icons-material'
 
-import { Toolbar } from '@/Presentation/Components/UI'
+import { ListItem, Toolbar } from '@/Presentation/Components/UI'
 import { useAuthentication } from '@/Presentation/Context'
 import {
   AppMenu,
+  Divider,
   Drawer,
   ImageProfileButton,
   MessagesContainer,
@@ -121,7 +122,8 @@ export const DesktopDrawer = ({ open = true }: Pick<DrawerProps, 'open'>) => {
         </AppMenu>
 
         <Warning>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor sit
+          amet consectetur.
         </Warning>
 
         <SearchUserContainer>
@@ -147,11 +149,13 @@ export const DesktopDrawer = ({ open = true }: Pick<DrawerProps, 'open'>) => {
         </SearchUserContainer>
       </Toolbar>
 
-      <MessagesContainer component="section">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
-        asperiores beatae cum, cumque doloremque dolores enim iusto libero minus
-        modi molestiae nihil, nisi omnis quae soluta tempore vitae voluptate
-        voluptatem!
+      <MessagesContainer sx={{ width: '100%' }}>
+        {Array.from(Array(20).keys()).map((value, index) => (
+          <>
+            <ListItem key={value} />
+            {index + 1 !== 20 && <Divider variant="inset" component="li" />}
+          </>
+        ))}
       </MessagesContainer>
     </Drawer>
   )
